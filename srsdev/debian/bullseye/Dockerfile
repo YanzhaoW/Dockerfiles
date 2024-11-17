@@ -17,7 +17,15 @@ RUN apt-get update &&\
         wget -qO /etc/apt/trusted.gpg.d/llvm.asc https://apt.llvm.org/llvm-snapshot.gpg.key &&\
         apt-get -qq update &&\
         apt-get install -qqy -t llvm-toolchain-${RELEASE}-19 clang-19 &&\
-        apt-get update && rm -rf /gcc-14.2.0 /gcc-14.2.0.tar.gz /root-src /root-build
+        apt-get update && rm -rf /gcc-14.2.0 /gcc-14.2.0.tar.gz /root-src /root-build &&\
+        (type -p wget >/dev/null || ( apt update &&  apt-get install wget -y)) \
+        &&  mkdir -p -m 755 /etc/apt/keyrings \
+        && wget -qO- https://cli.github.com/packages/githubcli-archive-keyring.gpg |  tee /etc/apt/keyrings/githubcli-archive-keyring.gpg > /dev/null \
+        &&  chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg \
+        && echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" |  tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
+        &&  apt update \
+        &&  apt install gh -y
 
 ENV CC="/usr/lib/llvm-19/bin/clang --gcc-toolchain=/usr/local"
 ENV CXX="/usr/lib/llvm-19/bin/clang++ --gcc-toolchain=/usr/local"
+
