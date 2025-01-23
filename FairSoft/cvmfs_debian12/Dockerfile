@@ -1,13 +1,14 @@
-FROM silkeh/clang:12
+FROM silkeh/clang:19-bookworm
 
 ENV NThreads=6
 ENV FAIRSOFT_VER="jan24p5"
 
 RUN apt-get autoremove -y &&\
     apt-get update -y && apt-get upgrade -y &&\
-    apt-get install -y git ninja-build lsb-release libgtest-dev libgmock-dev valgrind ccache curl &&\
+    apt-get install -y git ninja-build python3-pip lsb-release libgtest-dev libgmock-dev valgrind ccache curl &&\
     apt-get --fix-broken install -y&&\
-    apt-get install -y libssl-dev python3-pip libmaxminddb0 libmaxminddb-dev mmdb-bin cpio uuid-dev libfuse-dev libcap-dev unzip libfuse3-dev &&\
+    apt-get install -y libssl-dev libmaxminddb0 libmaxminddb-dev mmdb-bin cpio uuid-dev libfuse-dev libcap-dev unzip libfuse3-dev &&\
+    python3 -m pip config set global.break-system-packages true &&\
     pip install -U setuptools &&\
     mkdir -p /misc &&\
     cd /misc &&\
@@ -19,6 +20,8 @@ RUN apt-get autoremove -y &&\
     apt-get remove -y cmake &&\
     ./FairSoft/bootstrap-cmake.sh /usr &&\
     rm -rf FairSoft
+
+CMD ["python3", "-m", "pip", "config", "set", "global.break-system-packages", "true"]
 
 LABEL name="cvmfs_clang15"
 LABEL email="yannzhaow@gmail.com"
