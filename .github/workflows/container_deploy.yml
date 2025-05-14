@@ -1,0 +1,37 @@
+name: deploy-containers
+
+on:
+  workflow_dispatch:
+
+jobs:
+  docker-build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        container-folder:
+          - 'r3bdev/fedora-latest'
+        include:
+          - container-folder: 'r3bdev/fedora-latest'
+          - repo: 'r3bdev:fedora-latest'
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: 'true'
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: yanzhaowang
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          push: true
+          context: ${{ matrix.container-folder }}
+          tags: yanzhaowang/${{ matrix.repo }}
+          build-args: |
+            THREAD_NUM=4 
+            FAIRSOFT_VERSION="jan24p4"
