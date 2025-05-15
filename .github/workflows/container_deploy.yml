@@ -37,4 +37,4 @@ jobs:
           tags: yanzhaowang/${{ matrix.repo }}
           build-args: |
             THREAD_NUM=4 
-            FAIRSOFT_VERSION="v1.0.0"
+            FAIRSOFT_VERSION=v1.0.0
