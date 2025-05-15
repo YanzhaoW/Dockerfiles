@@ -1,6 +1,9 @@
 name: deploy-containers
 
 on:
+  schedule:
+    # trigger the workflow on the 15th of every month at 2 am
+    - cron: '0 2 15 * *'
   workflow_dispatch:
 
 jobs:
@@ -34,4 +37,4 @@ jobs:
           tags: yanzhaowang/${{ matrix.repo }}
           build-args: |
             THREAD_NUM=4 
-            FAIRSOFT_VERSION="jan24p4"
+            FAIRSOFT_VERSION="v1.0.0"
