@@ -6,7 +6,7 @@ ARG FAIRSOFT_VERSION="v1.0.0"
 RUN yes | dnf upgrade --refresh &&\
         echo "strict=False" >> /etc/dnf/dnf.conf &&\
         echo "skip_if_unavailable=True" >> /etc/dnf/dnf.conf &&\
-        dnf install -y util-linux which gcc gcc-gfortran clang langpacks-en net-tools iputils tmux procps cmake ninja-build ccache neovim zsh htop git gdb lldb valgrind wget nc man pmix-devel pmix-tools byacc gawk json-devel openssh-server xauth&&\
+        dnf install -y util-linux which gcc gcc-gfortran clang langpacks-en net-tools iputils tmux procps cmake ninja-build ccache neovim zsh htop git gdb lldb valgrind wget nc man pmix-devel pmix-tools byacc gawk json-devel graphviz doxygen ghostscript openssh-server xauth&&\
         dnf autoremove -y &&\
         mkdir -p /tmp/download && cd /tmp/download &&\
         wget https://download.open-mpi.org/release/open-mpi/v5.0/openmpi-5.0.6.tar.gz &&\
