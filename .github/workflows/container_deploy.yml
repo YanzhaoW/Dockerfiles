@@ -8,14 +8,23 @@ on:
 
 jobs:
   docker-build:
-    runs-on: ubuntu-latest
     strategy:
       matrix:
         container-folder:
           - 'r3bdev/fedora-latest'
+          - 'r3bdev/fedora-latest-arm'
         include:
           - container-folder: 'r3bdev/fedora-latest'
-          - repo: 'r3bdev:fedora-latest'
+            repo: 'r3bdev:fedora-latest'
+            build-repo: 'fedora'
+            build-env: 'ubuntu-latest'
+            thread-num: 4
+          - container-folder: 'r3bdev/fedora-latest-arm'
+            repo: 'r3bdev:fedora-latest-arm'
+            build-repo: 'arm64v8'
+            build-env: 'macos-latest'
+            thread-num: 3
+    runs-on: ${{ matrix.build-env }}
 
     steps:
       - uses: actions/checkout@v4
@@ -36,5 +45,6 @@ jobs:
           context: ${{ matrix.container-folder }}
           tags: yanzhaowang/${{ matrix.repo }}
           build-args: |
-            THREAD_NUM=4 
+            BUILD_REPO=${{ matrix.build-repo }}
+            THREAD_NUM=${{ matrix.thread-num }}
             FAIRSOFT_VERSION=v1.0.0
