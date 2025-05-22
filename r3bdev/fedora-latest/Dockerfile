@@ -4,6 +4,10 @@ FROM ${BUILD_REPO}:latest
 ARG THREAD_NUM=4
 ARG FAIRSOFT_VERSION="v1.0.0"
 
+ENV SIMPATH="/opt/FairSoft"
+ENV FAIRROOTPATH="/opt/FairRoot"
+ENV UCESB_DIR="/opt/ucesb"
+
 RUN yes | dnf upgrade --refresh &&\
         echo "strict=False" >> /etc/dnf/dnf.conf &&\
         echo "skip_if_unavailable=True" >> /etc/dnf/dnf.conf &&\
@@ -15,17 +19,17 @@ RUN yes | dnf upgrade --refresh &&\
         ./configure --with-slurm --with-pmix && make -j${THREAD_NUM} && make install && cd .. &&\
         export CC=clang && export FC=gfortran && export CXX=clang++ &&\
         # install fairsoft &&\
-        mkdir -p /opt/FairSoft &&\
+        mkdir -p ${SIMPATH} &&\
         cd /tmp/download &&\
         git clone --depth 1 --branch ${FAIRSOFT_VERSION} https://github.com/YanzhaoW/FairSoft.git &&\
         cd FairSoft && source legacy/setup-fedora.sh &&\
         mkdir build && cd build &&\
-        cmake -DCMAKE_INSTALL_PREFIX=/opt/FairSoft -GNinja .. && ninja -j${THREAD_NUM} &&\
+        cmake -DCMAKE_INSTALL_PREFIX=${SIMPATH} -GNinja .. && ninja -j${THREAD_NUM} &&\
         # install fairroot &&\
-        mkdir -p /opt/FairRoot &&\
+        mkdir -p ${FAIRROOTPATH} &&\
         cd /tmp/download &&\
         git clone --depth 1 --branch dev https://github.com/FairRootGroup/FairRoot.git &&\
-        mkdir -p FairRoot/build && cd FairRoot/build && cmake -GNinja -DCMAKE_INSTALL_PREFIX=/opt/FairRoot .. &&\
+        mkdir -p FairRoot/build && cd FairRoot/build && cmake -GNinja -DCMAKE_INSTALL_PREFIX=${FAIRROOTPATH} .. &&\
         ninja -j${THREAD_NUM} && ninja install &&\
         # install ucesb &&\
         make -p /opt && cd /opt &&\
@@ -36,7 +40,3 @@ RUN yes | dnf upgrade --refresh &&\
         echo "root:root" | chpasswd && echo "PermitRootLogin yes" >> /etc/ssh/sshd_config &&\
         touch ~/.Xauthority &&\
         chsh -s /usr/bin/zsh
-
-ENV SIMPATH="/opt/FairSoft"
-ENV FAIRROOTPATH="/opt/FairRoot"
-ENV UCESB_DIR="/opt/ucesb"
