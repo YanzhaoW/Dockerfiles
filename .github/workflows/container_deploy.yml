@@ -11,20 +11,18 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        container-folder:
-          - 'r3bdev/fedora-latest'
-          - 'r3bdev/fedora-latest-arm'
+        repo: 
+          - 'r3bdev:fedora-latest'
+          - 'r3bdev:fedora-latest-arm'
         include:
-          - container-folder: 'r3bdev/fedora-latest'
-            repo: 'r3bdev:fedora-latest'
+          - repo: 'r3bdev:fedora-latest'
+            container-folder: 'r3bdev/fedora-latest'
             build-repo: 'fedora'
             build-env: 'ubuntu-latest'
-            thread-num: 4
-          - container-folder: 'r3bdev/fedora-latest-arm'
-            repo: 'r3bdev:fedora-latest-arm'
+          - repo: 'r3bdev:fedora-latest-arm'
+            container-folder: 'r3bdev/fedora-latest'
             build-repo: 'arm64v8'
             build-env: 'ubuntu-24.04-arm'
-            thread-num: 4
     runs-on: ${{ matrix.build-env }}
 
     steps:
@@ -47,5 +45,5 @@ jobs:
           tags: yanzhaowang/${{ matrix.repo }}
           build-args: |
             BUILD_REPO=${{ matrix.build-repo }}
-            THREAD_NUM=${{ matrix.thread-num }}
+            THREAD_NUM=4
             FAIRSOFT_VERSION=v1.0.0
