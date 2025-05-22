@@ -21,7 +21,7 @@ jobs:
             build-env: 'ubuntu-latest'
           - repo: 'r3bdev:fedora-latest-arm'
             container-folder: 'r3bdev/fedora-latest'
-            build-repo: 'arm64v8'
+            build-repo: 'arm64v8/fedora'
             build-env: 'ubuntu-24.04-arm'
     runs-on: ${{ matrix.build-env }}
 
