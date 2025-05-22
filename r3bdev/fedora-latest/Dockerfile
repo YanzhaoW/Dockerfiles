@@ -36,7 +36,14 @@ RUN yes | dnf upgrade --refresh &&\
         git clone https://git.chalmers.se/expsubphys/ucesb.git && cd ucesb && make empty/empty &&\
         # remove source files &&\
         cd / && rm -rf /tmp/download && dnf autoremove -y &&\
+        # setup root account &&\
+        echo "root:root" | chpasswd &&\
         # setup sshd server &&\
-        echo "root:root" | chpasswd && echo "PermitRootLogin yes" >> /etc/ssh/sshd_config &&\
-        touch ~/.Xauthority &&\
-        chsh -s /usr/bin/zsh
+        && echo "PermitRootLogin yes" >> /etc/ssh/sshd_config &&\
+        # setup environments for ssh login: &&\
+        touch /etc/profile.d/r3b.sh &&\
+        echo "export SIMPATH=${SIMPATH}" &&\
+        echo "export FAIRROOT=${FAIRROOT}" &&\
+        echo "export UCESB_DIR=${UCESB_DIR}"
+
+CMD ["/usr/sbin/sshd", "-D"]
