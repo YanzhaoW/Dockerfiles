@@ -9,6 +9,7 @@ on:
 jobs:
   docker-build:
     strategy:
+      fail-fast: false
       matrix:
         container-folder:
           - 'r3bdev/fedora-latest'
@@ -22,8 +23,8 @@ jobs:
           - container-folder: 'r3bdev/fedora-latest-arm'
             repo: 'r3bdev:fedora-latest-arm'
             build-repo: 'arm64v8'
-            build-env: 'macos-latest'
-            thread-num: 3
+            build-env: 'ubuntu-24.04-arm'
+            thread-num: 4
     runs-on: ${{ matrix.build-env }}
 
     steps:
