@@ -31,7 +31,7 @@ RUN yes | dnf upgrade --refresh &&\
         git clone --depth 1 --branch dev https://github.com/FairRootGroup/FairRoot.git &&\
         mkdir -p FairRoot/build && cd FairRoot/build && cmake -GNinja -DCMAKE_INSTALL_PREFIX=${FAIRROOTPATH} .. &&\
         ninja -j${THREAD_NUM} && ninja install &&\
-        # install ucesb &&\
+        install ucesb &&\
         make -p /opt && cd /opt &&\
         git clone https://git.chalmers.se/expsubphys/ucesb.git && cd ucesb && make empty/empty &&\
         # remove source files &&\
@@ -39,11 +39,11 @@ RUN yes | dnf upgrade --refresh &&\
         # setup root account &&\
         echo "root:root" | chpasswd &&\
         # setup sshd server &&\
-        && echo "PermitRootLogin yes" >> /etc/ssh/sshd_config &&\
+        echo "PermitRootLogin yes" >> /etc/ssh/sshd_config &&\
         # setup environments for ssh login: &&\
         touch /etc/profile.d/r3b.sh &&\
-        echo "export SIMPATH=${SIMPATH}" &&\
-        echo "export FAIRROOT=${FAIRROOT}" &&\
-        echo "export UCESB_DIR=${UCESB_DIR}"
+        echo "export SIMPATH=${SIMPATH}" >> /etc/profile.d/r3b.sh &&\
+        echo "export FAIRROOT=${FAIRROOT}" >> /etc/profile.d/r3b.sh &&\
+        echo "export UCESB_DIR=${UCESB_DIR}" >> /etc/profile.d/r3b.sh
 
 CMD ["/usr/sbin/sshd", "-D"]
