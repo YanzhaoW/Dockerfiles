@@ -43,7 +43,7 @@ RUN yes | dnf upgrade --refresh &&\
         # setup environments for ssh login: &&\
         touch /etc/profile.d/r3b.sh &&\
         echo "export SIMPATH=${SIMPATH}" >> /etc/profile.d/r3b.sh &&\
-        echo "export FAIRROOT=${FAIRROOT}" >> /etc/profile.d/r3b.sh &&\
+        echo "export FAIRROOTPATH=${FAIRROOTPATH}" >> /etc/profile.d/r3b.sh &&\
         echo "export UCESB_DIR=${UCESB_DIR}" >> /etc/profile.d/r3b.sh
 
 CMD ["/usr/sbin/sshd", "-D"]
