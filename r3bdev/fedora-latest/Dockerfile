@@ -3,6 +3,7 @@ FROM ${BUILD_REPO}:latest
 
 ARG THREAD_NUM=4
 ARG FAIRSOFT_VERSION="v1.0.0"
+ARG ROOT_VERSION="6.36.00"
 
 ENV SIMPATH="/opt/FairSoft"
 ENV FAIRROOTPATH="/opt/FairRoot"
@@ -11,7 +12,7 @@ ENV UCESB_DIR="/opt/ucesb"
 RUN yes | dnf upgrade --refresh &&\
         echo "strict=False" >> /etc/dnf/dnf.conf &&\
         echo "skip_if_unavailable=True" >> /etc/dnf/dnf.conf &&\
-        dnf install -y util-linux which gcc gcc-gfortran clang langpacks-en net-tools iputils tmux procps cmake ninja-build ccache neovim zsh htop git gdb lldb valgrind wget nc man pmix-devel pmix-tools byacc gawk json-devel graphviz doxygen ghostscript openssh-server xauth byacc conda&&\
+        dnf install -y util-linux which gcc gcc-gfortran clang langpacks-en net-tools iputils tmux procps cmake ninja-build ccache neovim zsh htop git gdb lldb valgrind wget nc man pmix-devel pmix-tools byacc gawk json-devel graphviz doxygen ghostscript openssh-server xauth byacc conda clang-tools-extra&&\
         dnf autoremove -y &&\
         mkdir -p /tmp/download && cd /tmp/download &&\
         wget https://download.open-mpi.org/release/open-mpi/v5.0/openmpi-5.0.6.tar.gz &&\
@@ -24,7 +25,7 @@ RUN yes | dnf upgrade --refresh &&\
         git clone --depth 1 --branch ${FAIRSOFT_VERSION} https://github.com/YanzhaoW/FairSoft.git &&\
         cd FairSoft && source legacy/setup-fedora.sh &&\
         mkdir build && cd build &&\
-        cmake -DCMAKE_INSTALL_PREFIX=${SIMPATH} -GNinja .. && ninja -j${THREAD_NUM} &&\
+        cmake -DCMAKE_INSTALL_PREFIX=${SIMPATH} -DUSE_ROOT_VERSION=${ROOT_VERSION} -GNinja .. && ninja -j${THREAD_NUM} &&\
         # install fairroot &&\
         mkdir -p ${FAIRROOTPATH} &&\
         cd /tmp/download &&\
