@@ -32,7 +32,7 @@ jobs:
             build-repo: 'arm64v8/fedora'
             build-env: 'ubuntu-24.04-arm'
             root-version: "6.36.00"
-          - repo: 'r3bdev:fedora-latest-arm'
+          - repo: 'r3bdev:fedora-stable-arm'
             container-folder: 'r3bdev/fedora-latest'
             build-repo: 'arm64v8/fedora'
             build-env: 'ubuntu-24.04-arm'
