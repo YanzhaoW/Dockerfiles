@@ -25,12 +25,12 @@ RUN yes | dnf upgrade --refresh &&\
         git clone --depth 1 --branch ${FAIRSOFT_VERSION} https://github.com/YanzhaoW/FairSoft.git &&\
         cd FairSoft && source legacy/setup-fedora.sh &&\
         mkdir build && cd build &&\
-        cmake -DCMAKE_INSTALL_PREFIX=${SIMPATH} -DUSE_ROOT_VERSION=${ROOT_VERSION} -GNinja .. && ninja -j${THREAD_NUM} &&\
+        cmake -DCMAKE_INSTALL_PREFIX=${SIMPATH} -DCMAKE_CXX_STANDARD=20 -DUSE_ROOT_VERSION=${ROOT_VERSION} -GNinja .. && ninja -j${THREAD_NUM} &&\
         # install fairroot &&\
         mkdir -p ${FAIRROOTPATH} &&\
         cd /tmp/download &&\
         git clone --depth 1 --branch dev https://github.com/FairRootGroup/FairRoot.git &&\
-        mkdir -p FairRoot/build && cd FairRoot/build && cmake -GNinja -DCMAKE_INSTALL_PREFIX=${FAIRROOTPATH} -DCMAKE_CXX_STANDARD=23 .. &&\
+        mkdir -p FairRoot/build && cd FairRoot/build && cmake -GNinja -DCMAKE_INSTALL_PREFIX=${FAIRROOTPATH} -DCMAKE_CXX_STANDARD=20 .. &&\
         ninja -j${THREAD_NUM} && ninja install &&\
         # install ucesb &&\
         make -p /opt && cd /opt &&\
