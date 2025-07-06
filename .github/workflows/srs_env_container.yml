@@ -1,0 +1,62 @@
+name: srs-control-env
+
+on:
+  schedule:
+    # trigger the workflow on the 15th of every month at 2 am
+    - cron: '0 2 15 * *'
+  workflow_dispatch:
+
+jobs:
+  docker-build:
+    strategy:
+      fail-fast: false
+      matrix:
+        repo: 
+          - 'srs-env:fedora-41'
+          - 'srs-env:fedora-42'
+          - 'srs-env:debian-bullseye'
+          - 'srs-env:debian-bookworm'
+        include:
+          - repo: 'srs-env:fedora-41'
+            container-folder: 'srsdev/fedora'
+            build-repo: 'fedora:41'
+            release: 'fedora'
+          - repo: 'srs-env:fedora-42'
+            container-folder: 'srsdev/fedora'
+            build-repo: 'fedora:42'
+            release: 'fedora'
+          - repo: 'srs-env:debian-bullseye'
+            container-folder: 'srsdev/debian-based'
+            build-repo: 'debian:bullseye-slim'
+            release: 'bullseye'
+          - repo: 'srs-env:debian-bookworm'
+            container-folder: 'srsdev/debian-based'
+            build-repo: 'debian:bookworm-slim'
+            release: 'bookworm'
+    runs-on: ${{ matrix.build-env }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: 'true'
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: yanzhaowang
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          push: true
+          context: ${{ matrix.container-folder }}
+          tags: yanzhaowang/${{ matrix.repo }}
+          build-args: |
+            GCC_VERSION=${{ vars.SRS_GCC_VERSION }}
+            CLANG_VERSION=${{ vars.SRS_CLANG_VERSION }}
+            RELEASE=${{ matrix.release }}
+            BASE_IMAG=${{ matrix.build-repo }}
+            THREAD_NUM=4
+
