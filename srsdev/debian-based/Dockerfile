@@ -10,6 +10,9 @@ ENV CMAKE_GENERATOR=Ninja
 
 RUN apt-get update &&\
         apt-get install -y cmake wget ninja-build git binutils dpkg-dev g++ gcc libssl-dev libx11-dev libxext-dev libxft-dev libxpm-dev python3 libtbb-dev libgif-dev libgmp-dev libmpfr-dev libmpc-dev libisl-dev libzstd-dev&&\
+        wget https://github.com/Kitware/CMake/releases/download/v4.0.3/cmake-4.0.3-linux-x86_64.tar.gz &&\
+        tar -xf cmake-4.0.3-linux-x86_64.tar.gz -C /usr/local --strip-components=1 &&\
+        rm cmake-4.0.3-linux-x86_64.tar.gz &&\
         mkdir -p root-build&&\
         git clone -b latest-stable --depth=1 https://github.com/root-project/root.git root-src &&\
         cmake -B root-build -S root-src -GNinja -Dxrootd=OFF &&\
