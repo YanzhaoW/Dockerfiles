@@ -33,7 +33,7 @@ jobs:
             container-folder: 'srsdev/debian-based'
             build-repo: 'debian:bookworm-slim'
             release: 'bookworm'
-    runs-on: ${{ matrix.build-env }}
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
