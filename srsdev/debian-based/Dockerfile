@@ -1,10 +1,11 @@
+ARG BASE_IMAG="debian:bullseye-slim"
+
+FROM ${BASE_IMAG}
+
 ARG GCC_VERSION="15.1.0"
 ARG CLANG_VERSION=20
 ARG RELEASE=bullseye
-ARG BASE_IMAG="debian:bullseye-slim"
 ARG THREAD_NUM=4
-
-FROM ${BASE_IMAG}
 ENV CMAKE_GENERATOR=Ninja
 
 RUN apt-get update &&\
