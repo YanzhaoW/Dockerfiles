@@ -19,7 +19,7 @@ RUN yes | dnf upgrade --refresh &&\
         tar -xvzf openmpi-5.0.6.tar.gz && cd openmpi-5.0.6 &&\
         ./configure --with-slurm --with-pmix && make -j${THREAD_NUM} && make install && cd .. &&\
         rm -rf /tmp/download/* &&\
-        # export CC=clang && export FC=gfortran && export CXX=clang++ &&\
+        export CC=clang && export FC=gfortran && export CXX=clang++ &&\
         # install fairsoft &&\
         mkdir -p ${SIMPATH} &&\
         cd /tmp/download &&\
