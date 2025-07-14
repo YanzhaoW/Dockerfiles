@@ -18,6 +18,7 @@ RUN yes | dnf upgrade --refresh &&\
         wget https://download.open-mpi.org/release/open-mpi/v5.0/openmpi-5.0.6.tar.gz &&\
         tar -xvzf openmpi-5.0.6.tar.gz && cd openmpi-5.0.6 &&\
         ./configure --with-slurm --with-pmix && make -j${THREAD_NUM} && make install && cd .. &&\
+        rm -rf /tmp/download/* &&\
         # export CC=clang && export FC=gfortran && export CXX=clang++ &&\
         # install fairsoft &&\
         mkdir -p ${SIMPATH} &&\
@@ -26,12 +27,14 @@ RUN yes | dnf upgrade --refresh &&\
         cd FairSoft && source legacy/setup-fedora.sh &&\
         mkdir build && cd build &&\
         cmake -DCMAKE_INSTALL_PREFIX=${SIMPATH} -DUSE_ROOT_VERSION=${ROOT_VERSION} -GNinja .. && ninja -j${THREAD_NUM} &&\
+        rm -rf /tmp/download/* &&\
         # install fairroot &&\
         mkdir -p ${FAIRROOTPATH} &&\
         cd /tmp/download &&\
         git clone --depth 1 --branch dev https://github.com/FairRootGroup/FairRoot.git &&\
         mkdir -p FairRoot/build && cd FairRoot/build && cmake -GNinja -DCMAKE_INSTALL_PREFIX=${FAIRROOTPATH} .. &&\
         ninja -j${THREAD_NUM} && ninja install &&\
+        rm -rf /tmp/download/* &&\
         # install ucesb &&\
         make -p /opt && cd /opt &&\
         git clone https://git.chalmers.se/expsubphys/ucesb.git && cd ucesb && make empty/empty &&\
