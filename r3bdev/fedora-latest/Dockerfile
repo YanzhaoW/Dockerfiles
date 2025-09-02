@@ -12,7 +12,7 @@ ENV UCESB_DIR="/opt/ucesb"
 RUN yes | dnf upgrade --refresh &&\
         echo "strict=False" >> /etc/dnf/dnf.conf &&\
         echo "skip_if_unavailable=True" >> /etc/dnf/dnf.conf &&\
-        dnf install -y util-linux which gcc gcc-gfortran clang langpacks-en net-tools iputils tmux procps cmake ninja-build ccache neovim zsh htop git gdb lldb valgrind wget nc man pmix-devel pmix-tools byacc gawk json-devel graphviz doxygen ghostscript openssh-server xauth byacc conda clang-tools-extra lsb_release fastfetch&&\
+        dnf install -y util-linux which gcc gcc-gfortran clang libcxx-devel langpacks-en net-tools iputils tmux procps cmake ninja-build ccache neovim zsh htop git gdb lldb valgrind wget nc man pmix-devel pmix-tools byacc gawk json-devel graphviz doxygen ghostscript openssh-server xauth byacc conda clang-tools-extra lsb_release fastfetch&&\
         dnf autoremove -y &&\
         mkdir -p /tmp/download && cd /tmp/download &&\
         wget https://download.open-mpi.org/release/open-mpi/v5.0/openmpi-5.0.6.tar.gz &&\
