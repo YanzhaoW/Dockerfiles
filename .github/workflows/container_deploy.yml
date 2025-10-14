@@ -2,8 +2,8 @@ name: r3bdev-container
 
 on:
   schedule:
-    # trigger the workflow on the 15th of every month at 2 am
-    - cron: '0 2 15 * *'
+    # trigger the workflow on the every sunday at 2 am UTC
+    - cron: '0 2 * * 6'
   workflow_dispatch:
 
 jobs:
