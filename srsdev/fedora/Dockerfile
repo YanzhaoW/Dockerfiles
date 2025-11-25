@@ -12,5 +12,7 @@ ENV CC=clang
 ENV CXX="clang++"
 
 RUN yes | dnf update && yes | dnf upgrade &&\
-        dnf install -y cmake llvm gcc tar git tbb-devel wget ninja root gh zlib-devel libcxx &&\
+        dnf install -y cmake tar git tbb-devel wget ninja root gh zlib-devel &&\
+        dnf install -y clang clang-tools-extra lld libcxx libcxx-static libcxxabi libcxxabi-static &&\
+        dnf install -y gcc gcc-c++ libgcc libstdc++-devel libstdc++-static libasan libtsan libubsan liblsan libhwasan &&\
         dnf clean all

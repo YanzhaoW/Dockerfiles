@@ -12,14 +12,14 @@ jobs:
       fail-fast: false
       matrix:
         repo: 
-          - 'srs-env:fedora-41'
+          - 'srs-env:fedora-43'
           - 'srs-env:fedora-42'
           - 'srs-env:debian-bullseye'
           - 'srs-env:debian-bookworm'
         include:
-          - repo: 'srs-env:fedora-41'
+          - repo: 'srs-env:fedora-43'
             container-folder: 'srsdev/fedora'
-            build-repo: 'fedora:41'
+            build-repo: 'fedora:43'
             release: 'fedora'
           - repo: 'srs-env:fedora-42'
             container-folder: 'srsdev/fedora'
