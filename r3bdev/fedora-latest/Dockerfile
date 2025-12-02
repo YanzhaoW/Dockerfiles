@@ -14,6 +14,7 @@ RUN yes | dnf upgrade --refresh &&\
         echo "skip_if_unavailable=True" >> /etc/dnf/dnf.conf &&\
         dnf install -y util-linux which gcc gcc-gfortran clang libcxx-devel langpacks-en net-tools iputils tmux procps cmake ninja-build ccache neovim zsh htop git gdb lldb valgrind wget nc man pmix-devel pmix-tools byacc gawk json-devel graphviz doxygen ghostscript openssh-server xauth byacc clang-tools-extra lsb_release fastfetch zlib-ng-compat-static tree file lcov&&\
         dnf install -y clang clang-tools-extra lld libcxx libcxx-static libcxxabi libcxxabi-static &&\
+        dnf install libasan libhwasan liblsan libtsan libubsan&&\
         dnf autoremove -y &&\
         mkdir -p /tmp/download && cd /tmp/download &&\
         wget https://download.open-mpi.org/release/open-mpi/v5.0/openmpi-5.0.6.tar.gz &&\
