@@ -1,0 +1,43 @@
+name: hdtv-container
+
+on:
+  workflow_dispatch:
+
+
+jobs:
+  docker-build:
+    strategy:
+      fail-fast: false
+      matrix:
+        repo: 
+          - 'hdtv:fedora'
+          - 'hdtv:fedora-arm'
+        include:
+          - repo: 'hdtv:fedora'
+            build-repo: 'fedora'
+            build-env: 'ubuntu-latest'
+          - repo: 'hdtv:fedora-arm'
+            build-repo: 'arm64v8/fedora'
+            build-env: 'ubuntu-24.04-arm'
+    runs-on: ${{ matrix.build-env }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: 'true'
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: yanzhaowang
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          push: true
+          context: 'hdtv'
+          tags: yanzhaowang/${{ matrix.repo }}
+          build-args: |
+            BUILD_REPO=${{ matrix.build-repo }}
