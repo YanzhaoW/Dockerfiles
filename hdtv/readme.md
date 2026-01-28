@@ -129,7 +129,7 @@ ssh -Y username@server_name
 2. Pull the image from dockehub:
 
    ```bash
-   docker pull docker.io/yanzhaowang/hdtv:fedora
+   podman pull docker.io/yanzhaowang/hdtv:fedora
    ```
 
 3. Run the docker container:
