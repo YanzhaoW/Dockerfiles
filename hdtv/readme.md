@@ -13,17 +13,17 @@ General notice:
 
 1. `docker` command in a Linux system, by default, requires the sudo permission. Please see [this instruction](https://docs.docker.com/engine/install/linux-postinstall/) to enable sudo permission by default when using `docker`.
 
-2. There are two images available from Dockerhub: `yanzhaowang/hdtv:fedora` and `yanzhaowang/hdtv:fedora_arm`. The first one is for machines with the x86_64 architecture, which is used by servers and most of the Windows PC. The second one is for machines with ARM architecture, which is used by MacBooks with Apple Silicon and some Windows/Linux laptops.
+2. There are two images available from Dockerhub: `yanzhaowang/hdtv:fedora` and `yanzhaowang/hdtv:fedora_arm`. The first one is for machines with the x86_64 architecture, which is used by servers and most of the Windows PC. The second one is for machines with the ARM architecture, which is used by MacBooks with Apple Silicon and some Windows/Linux laptops.
 
-3. The command to run the docker container is pretty long. Thus, it's recommended to create an alias to the command in `.bashrc` (bash), `.zshrc` (zsh). For Windows 11, check this [instruction](https://stackoverflow.com/questions/24914589/how-to-create-permanent-powershell-aliases) to create a permanent alias.
+3. Commands to run docker containers are usually pretty long. Thus, it's recommended to create an alias to the command in `.bashrc` (bash), `.zshrc` (zsh). For Windows 11, check this [instruction](https://stackoverflow.com/questions/24914589/how-to-create-permanent-powershell-aliases) to create a permanent alias.
 
-4. The `docker run` command below mounts your current folder to the `/data` inside the container. If another folder needs to be mounted, add `-v host_file_locaiton/container_location` to the command.
+4. The `docker run` command below mounts your current folder to the `/data` inside the container. If another folder needs to be mounted, add `-v host_file_locaiton:container_location` to the command.
 
 ## Linux
 
-1. Make sure the docker engine has been installed (For the installation, please check the [instruction here](https://docs.docker.com/engine/install)).
+1. Make sure the docker engine has been installed. To install it, please check the [instruction here](https://docs.docker.com/engine/install)).
 
-2. Make sure the hdtv image has been downloaded/updated. For the download or update, run:
+2. Make sure the hdtv image has been downloaded and updated. For the download or update, run:
 
    ```bash
    docker pull yanzhaowang/hdtv:fedora
@@ -53,7 +53,7 @@ General notice:
 
    A clock UI should appear.
 
-3. Make sure the hdtv image has been downloaded/updated. To download or update it, run:
+3. Make sure the hdtv image has been downloaded and updated. To download or update it, run:
 
    ```bash
    docker pull yanzhaowang/hdtv:fedora-arm
