@@ -17,7 +17,7 @@ General notice:
 
 * Commands that run docker containers are usually pretty long. Thus, it's recommended to create an alias of the command in `.bashrc` (bash), `.zshrc` (zsh). For Windows 11, check out this [instruction](https://stackoverflow.com/questions/24914589/how-to-create-permanent-powershell-aliases) to create a permanent alias.
 
-* The `docker run` command below mounts your current folder to the `/data` inside the container. If another folder needs to be mounted, add `-v host_file_locaiton:container_location` to the command.
+* The `docker run` command below mounts your current folder and `~/.local/share/hdtv` to the `/data` and `/root/.local/share/hdtv` inside the container. If another folder needs to be mounted, add `-v host_file_locaiton:container_location` to the command.
 
 * Even though the docker desktop provides some functionalities to run the docker container, the following instructions are done only via terminals (PowerShell in case of Windows).
 
@@ -40,7 +40,7 @@ General notice:
 4. Run the docker container with:
 
    ```bash
-   docker run --env "DISPLAY" -v ${HOME}/.Xauthority:/root/.Xauthority -v $(pwd):/data -it --rm --net=host --name hdtv yanzhaowang/hdtv:fedora
+   docker run --env "DISPLAY" -v ${HOME}/.Xauthority:/root/.Xauthority -v ${HOME}/.local/share/hdtv:/root/.local/share/hdtv -v $(pwd):/data -it --rm --net=host --name hdtv yanzhaowang/hdtv:fedora
    ```
 
 ## MacOS
@@ -70,7 +70,7 @@ General notice:
 5. Run the docker container with:
 
    ```bash
-   docker run -it --rm -e DISPLAY=docker.for.mac.host.internal:0 -v $(pwd):/data --name hdtv yanzhaowang/hdtv:fedora-arm
+   docker run -it --rm -e DISPLAY=docker.for.mac.host.internal:0 -v ${HOME}/.local/share/hdtv:/root/.local/share/hdtv -v $(pwd):/data --name hdtv yanzhaowang/hdtv:fedora-arm
    ```
 
 ### Additional references
@@ -117,7 +117,7 @@ ssh -Y username@server_name
 3. Once inside the server, run
 
    ```bash
-   docker run --env "DISPLAY" -v ${HOME}/.Xauthority:/root/.Xauthority -v $(pwd):/data -it --rm --net=host --name hdtv yanzhaowang/hdtv:fedora
+   docker run --env "DISPLAY" -v ${HOME}/.Xauthority:/root/.Xauthority -v ${HOME}/.local/share/hdtv:/root/.local/share/hdtv -v $(pwd):/data -it --rm --net=host --name hdtv yanzhaowang/hdtv:fedora
    ```
 
 ### Without sudo privilege (Podman)
@@ -133,7 +133,7 @@ ssh -Y username@server_name
 3. Run the docker container:
 
    ```bash
-   podman run --env "DISPLAY" -v ${HOME}/.Xauthority:/root/.Xauthority:rw -v $(pwd):/data --security-opt label=type:container_runtime_t -it --rm --net=host --name hdtv yanzhaowang/hdtv:fedora
+   podman run --env "DISPLAY" -v ${HOME}/.Xauthority:/root/.Xauthority:rw -v ${HOME}/.local/share/hdtv:/root/.local/share/hdtv -v $(pwd):/data --security-opt label=type:container_runtime_t -it --rm --net=host --name hdtv yanzhaowang/hdtv:fedora
    ```
 
    NOTE: `--security-opt label=type:container_runtime_t` is not needed if SELinux is not enabled on the server.
