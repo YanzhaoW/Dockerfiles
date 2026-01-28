@@ -2,11 +2,12 @@
 
 Following systems are supported:
 
-* [Linux](#linux)
-* [MacOS](#macos)
-* [Windows11](#windows-11)
-* [Linux server](#linux-server)
-
+- [Linux](#linux)
+- [MacOS](#macos)
+- [Windows11](#windows-11)
+- [Linux server](#linux-server)
+  - [With sudo privilege](#with-sudo-privilege)
+  - [Without sudo privilege (Podman)](<#without-sudo-privilege-(podman)>)
 
 General notice:
 
@@ -85,21 +86,56 @@ General notice:
 2. Install XMing [here](https://sourceforge.net/projects/xming/).
 
 3. Once the docker desktop is installed, open Windows 11 Powershell (MobaXTerm can be used for older Windows) and install the image:
-    
-    ```bash
-    docker pull yanzhaowang/hdtv:fedora
-    ```
+
+   ```bash
+   docker pull yanzhaowang/hdtv:fedora
+   ```
+
 4. Go to the folder which contains the data via File Explorer , right click and choose "Open in Terminal".
 5. Run the docker container with (make sure XMing is running in the background):
 
-    ```bash
+   ```bash
    docker run -it --rm -e DISPLAY=host.docker.internal:0 -v "$((Get-Location).Path):/data" --name hdtv yanzhaowang/hdtv:fedora-arm
-    ```
+   ```
 
 ### Linux server
 
-First, please make sure `ssh -Y` is used when logging to the server. Once inside the server, run
+Please make sure `ssh -Y` is used when logging to the server.
 
 ```bash
-docker run --env "DISPLAY" -v ${HOME}/.Xauthority:/root/.Xauthority -v $(pwd):/data -it --rm --net=host --name hdtv yanzhaowang/hdtv:fedora
+ssh -Y username@server_name
 ```
+
+#### With sudo privilege
+
+1. Install docker engine (see the [section above](#linux)).
+
+2. Pull the docker image:
+
+   ```bash
+   docker pull yanzhaowang/hdtv:fedora
+   ```
+
+3. Once inside the server, run
+
+   ```bash
+   docker run --env "DISPLAY" -v ${HOME}/.Xauthority:/root/.Xauthority -v $(pwd):/data -it --rm --net=host --name hdtv yanzhaowang/hdtv:fedora
+   ```
+
+#### Without sudo privilege (Podman)
+
+1. Make sure Podman is installed in the system.
+
+2. Pull the image from dockehub:
+
+   ```bash
+   docker pull docker.io/yanzhaowang/hdtv:fedora
+   ```
+
+3. Run the docker container:
+
+   ```bash
+   podman run --env "DISPLAY" -v ${HOME}/.Xauthority:/root/.Xauthority:rw -v $(pwd):/data --security-opt label=type:container_runtime_t -it --rm --net=host --name hdtv yanzhaowang/hdtv:fedora
+   ```
+
+   NOTE: `--security-opt label=type:container_runtime_t` is not needed if the server system doesn't have SELinux enabled.
