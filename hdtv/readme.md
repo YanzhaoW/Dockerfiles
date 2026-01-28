@@ -13,11 +13,11 @@ General notice:
 
 1. `docker` command in a Linux system, by default, requires the sudo permission. Please see [this instruction](https://docs.docker.com/engine/install/linux-postinstall/) to enable sudo permission by default when using `docker`.
 
-2. There are two images available from dockerhub: `yanzhaowang/hdtv:fedora` and `yanzhaowang/hdtv:fedora_arm`. The first one is for x86_64 machines, which is used by servers and most of the Windows PC. The second one is for machines with ARM architecture, which is used by Macbooks with Apple silicon and some Windows laptops.
+2. There are two images available from Dockerhub: `yanzhaowang/hdtv:fedora` and `yanzhaowang/hdtv:fedora_arm`. The first one is for x86_64 machines, which is used by servers and most of the Windows PC. The second one is for machines with ARM architecture, which is used by MacBooks with Apple Silicon and some Windows laptops.
 
-3. The command to run the docker container is pretty long. Thus it's recommended to create an alias to the command in `.bashrc` (bash), `.zshrc` (zsh). In Windows 11, check this [instruction](https://stackoverflow.com/questions/24914589/how-to-create-permanent-powershell-aliases) to create a permanent alias.
+3. The command to run the docker container is pretty long. Thus, it's recommended to create an alias to the command in `.bashrc` (bash), `.zshrc` (zsh). In Windows 11, check this [instruction](https://stackoverflow.com/questions/24914589/how-to-create-permanent-powershell-aliases) to create a permanent alias.
 
-4. The `docker run` command below mount your current folder to the `/data` inside the container. If another folder needs to be mounted, add `-v host_file_locaiton/container_location` to the command.
+4. The `docker run` command below mounts your current folder to the `/data` inside the container. If another folder needs to be mounted, add `-v host_file_locaiton/container_location` to the command.
 
 ### Linux
 
