@@ -7,7 +7,7 @@ Following systems are supported:
 - [Windows11](#windows-11)
 - [Linux server](#linux-server)
   - [With sudo privilege](#with-sudo-privilege)
-  - [Without sudo privilege (Podman)](<#without-sudo-privilege-(podman)>)
+  - [Without sudo privilege (Podman)](#without-sudo-privilege-podman)
 
 General notice:
 
