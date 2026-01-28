@@ -21,21 +21,19 @@ General notice:
 
 ### Linux
 
-1. Install the docker engine (see the [instruction](https://docs.docker.com/engine/install)).
+1. Make sure the docker engine has been installed (For the installation, please check the [instruction here](https://docs.docker.com/engine/install)).
 
-2. Download the hdtv image:
+2. Make sure the hdtv image has been downloaded/updated. For the download or update, run:
 
    ```bash
    docker pull yanzhaowang/hdtv:fedora
    ```
 
-3. Enable xhost permission for the host:
+3. Make sure xhost permission for the host is enabled. To enable it, run:
 
    ```bash
    xhost +
    ```
-
-   You need to make sure this has been run before running the container in the next step.
 
 4. Run the docker container with:
 
@@ -45,15 +43,9 @@ General notice:
 
 ### MacOS
 
-1. Install the docker daemon (see the instruction [here](https://docs.docker.com/desktop/setup/install/mac-install/)).
+1. Make sure the docker daemon has been installed. For the installation, see the instruction [here](https://docs.docker.com/desktop/setup/install/mac-install/).
 
-2. Download the hdtv image:
-
-   ```bash
-   docker pull yanzhaowang/hdtv:fedora-arm
-   ```
-
-3. Install the latest version (including beta version) of XQuartz from its [official website](https://www.xquartz.org/releases/index.html). To check whether XQuartz is working, run:
+2. Make sure the latest version (including beta version) of XQuartz has been installed. It can be installed from its [official website](https://www.xquartz.org/releases/index.html). To check whether XQuartz is working, run:
 
    ```bash
    xclock
@@ -61,13 +53,17 @@ General notice:
 
    A clock UI should appear.
 
-4. Enable xhost permission for the host:
+3. Make sure the hdtv image has been downloaded/updated. To download or update it, run:
+
+   ```bash
+   docker pull yanzhaowang/hdtv:fedora-arm
+   ```
+
+4. Make sure xhost permission for the host is enabled. To enable it, run:
 
    ```bash
    xhost +
    ```
-
-   You need to make sure this has been run before running the container in the next step.
 
 5. Run the docker container with:
 
@@ -81,18 +77,18 @@ General notice:
 
 ### Windows 11
 
-1. Install docker desktop for Windows [here](https://docs.docker.com/desktop/setup/install/windows-install/).
+1. Make sure the docker desktop for Windows has been installed. To install it, please check [here](https://docs.docker.com/desktop/setup/install/windows-install/).
 
-2. Install XMing [here](https://sourceforge.net/projects/xming/).
+2. Make sure XMing has been installed. To install it, please check [here](https://sourceforge.net/projects/xming/).
 
-3. Once the docker desktop is installed, open Windows 11 Powershell (MobaXTerm can be used for older Windows) and install the image:
+3. Make sure the docker image has been downloaded and updated. To download or update it, open Windows 11 Powershell (MobaXTerm can be used for older Windows) and run:
 
    ```bash
    docker pull yanzhaowang/hdtv:fedora
    ```
 
-4. Go to the folder which contains the data via File Explorer , right click and choose "Open in Terminal".
-5. Run the docker container with (make sure XMing is running in the background):
+4. Go to the folder which contains the data via File Explorer, right click and choose "Open in Terminal".
+5. Run the docker container with (make sure XMing is still running in the background):
 
    ```bash
    docker run -it --rm -e DISPLAY=host.docker.internal:0 -v "$((Get-Location).Path):/data" --name hdtv yanzhaowang/hdtv:fedora-arm
@@ -100,7 +96,7 @@ General notice:
 
 ### Linux server
 
-Please make sure `ssh -Y` is used when logging to the server.
+Please make sure `ssh -Y` is used when logging into the server.
 
 ```bash
 ssh -Y username@server_name
@@ -108,9 +104,9 @@ ssh -Y username@server_name
 
 #### With sudo privilege
 
-1. Install docker engine (see the [section above](#linux)).
+1. Make sure docker engine is installed. Check the [section above](#linux) for its installation.
 
-2. Pull the docker image:
+2. Make sure the hdtv image has been downloaded/updated. To download or update it, run:
 
    ```bash
    docker pull yanzhaowang/hdtv:fedora
@@ -126,7 +122,7 @@ ssh -Y username@server_name
 
 1. Make sure Podman is installed in the system.
 
-2. Pull the image from dockehub:
+2. Make sure the hdtv image has been downloaded/updated. To download or update it, run:
 
    ```bash
    podman pull docker.io/yanzhaowang/hdtv:fedora
