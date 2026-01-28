@@ -91,7 +91,7 @@ General notice:
 5. Run the docker container with (make sure XMing is still running in the background):
 
    ```bash
-   docker run -it --rm -e DISPLAY=host.docker.internal:0 -v "$((Get-Location).Path):/data" --name hdtv yanzhaowang/hdtv:fedora-arm
+   docker run -it --rm -e DISPLAY=host.docker.internal:0 -v "$((Get-Location).Path):/data" --name hdtv yanzhaowang/hdtv:fedora
    ```
 
 ### Linux server
