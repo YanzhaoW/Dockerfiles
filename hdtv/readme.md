@@ -1,4 +1,4 @@
-# Run hdtv program via Docker container
+# How to run hdtv program via Docker container
 
 Following systems are supported:
 
@@ -11,17 +11,19 @@ Following systems are supported:
 
 General notice:
 
-1. `docker` command in a Linux system, by default, requires the sudo permission. Please see [this instruction](https://docs.docker.com/engine/install/linux-postinstall/) to enable sudo permission by default when using `docker`.
+* The `docker` command in a Linux system, by default, requires the sudo permission. Please check out this [instruction](https://docs.docker.com/engine/install/linux-postinstall/) to enable the sudo permission by default when using `docker`.
 
-2. There are two images available from Dockerhub: `yanzhaowang/hdtv:fedora` and `yanzhaowang/hdtv:fedora_arm`. The first one is for machines with the x86_64 architecture, which is used by servers and most of the Windows PC. The second one is for machines with the ARM architecture, which is used by MacBooks with Apple Silicon and some Windows/Linux laptops.
+* There are two images available at Dockerhub: `yanzhaowang/hdtv:fedora` and `yanzhaowang/hdtv:fedora_arm`. The first one is for machines with the x86_64 architecture, which is used by servers and most of the Windows PCs. The second one is for machines with the ARM architecture, which is used by MacBooks with Apple Silicon and some Windows/Linux laptops.
 
-3. Commands to run docker containers are usually pretty long. Thus, it's recommended to create an alias to the command in `.bashrc` (bash), `.zshrc` (zsh). For Windows 11, check this [instruction](https://stackoverflow.com/questions/24914589/how-to-create-permanent-powershell-aliases) to create a permanent alias.
+* Commands that run docker containers are usually pretty long. Thus, it's recommended to create an alias of the command in `.bashrc` (bash), `.zshrc` (zsh). For Windows 11, check out this [instruction](https://stackoverflow.com/questions/24914589/how-to-create-permanent-powershell-aliases) to create a permanent alias.
 
-4. The `docker run` command below mounts your current folder to the `/data` inside the container. If another folder needs to be mounted, add `-v host_file_locaiton:container_location` to the command.
+* The `docker run` command below mounts your current folder to the `/data` inside the container. If another folder needs to be mounted, add `-v host_file_locaiton:container_location` to the command.
+
+* Even though the docker desktop provides some functionalities to run the docker container, the following instructions are done only via terminals (PowerShell in case of Windows).
 
 ## Linux
 
-1. Make sure the docker engine has been installed. To install it, please check the [instruction here](https://docs.docker.com/engine/install)).
+1. Make sure the docker engine has been installed. To install it, please check out this [instruction](https://docs.docker.com/engine/install).
 
 2. Make sure the hdtv image has been downloaded and updated. For the download or update, run:
 
@@ -43,9 +45,9 @@ General notice:
 
 ## MacOS
 
-1. Make sure the docker daemon has been installed. For the installation, see the instruction [here](https://docs.docker.com/desktop/setup/install/mac-install/).
+1. Make sure the docker daemon has been installed. For the installation, check out this instruction [here](https://docs.docker.com/desktop/setup/install/mac-install/).
 
-2. Make sure the latest version (including beta version) of XQuartz has been installed. It can be installed from its [official website](https://www.xquartz.org/releases/index.html). To check whether XQuartz is working, run:
+2. Make sure the latest version (including beta versions) of XQuartz has been installed. It can be installed from its [official website](https://www.xquartz.org/releases/index.html). To check whether XQuartz is working, run:
 
    ```bash
    xclock
@@ -77,11 +79,11 @@ General notice:
 
 ## Windows 11
 
-1. Make sure the docker desktop for Windows has been installed. To install it, please check [here](https://docs.docker.com/desktop/setup/install/windows-install/).
+1. Make sure the docker desktop for Windows has been installed. To install it, please check out [this](https://docs.docker.com/desktop/setup/install/windows-install/).
 
-2. Make sure XMing has been installed. To install it, please check [here](https://sourceforge.net/projects/xming/).
+2. Make sure XMing has been installed. To install it, please check out [this](https://sourceforge.net/projects/xming/).
 
-3. Make sure the docker image has been downloaded and updated. To download or update it, open Windows 11 Powershell (MobaXTerm can be used for older Windows) and run:
+3. Make sure the docker image has been downloaded and updated. To download or update it, open the Windows 11 Powershell (MobaXTerm can be used for older Windows versions) and run:
 
    ```bash
    docker pull yanzhaowang/hdtv:fedora
@@ -104,7 +106,7 @@ ssh -Y username@server_name
 
 ### With sudo privilege
 
-1. Make sure docker engine is installed. Check the [section above](#linux) for its installation.
+1. Make sure the docker engine is installed. Check out the [section above](#linux) for its installation.
 
 2. Make sure the hdtv image has been downloaded/updated. To download or update it, run:
 
@@ -120,7 +122,7 @@ ssh -Y username@server_name
 
 ### Without sudo privilege (Podman)
 
-1. Make sure Podman is installed in the system.
+1. Make sure Podman is installed on the server.
 
 2. Make sure the hdtv image has been downloaded/updated. To download or update it, run:
 
@@ -134,4 +136,4 @@ ssh -Y username@server_name
    podman run --env "DISPLAY" -v ${HOME}/.Xauthority:/root/.Xauthority:rw -v $(pwd):/data --security-opt label=type:container_runtime_t -it --rm --net=host --name hdtv yanzhaowang/hdtv:fedora
    ```
 
-   NOTE: `--security-opt label=type:container_runtime_t` is not needed if the server system doesn't have SELinux enabled.
+   NOTE: `--security-opt label=type:container_runtime_t` is not needed if SELinux is not enabled on the server.
