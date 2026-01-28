@@ -26,6 +26,10 @@
     docker run -it --rm -e DISPLAY=docker.for.mac.host.internal:0 -v $(pwd):/data --name htest yanzhaowang/hdtv:fedora-arm
     ```
 
+#### Additional references
+
+* [X11 forwarding on macOS and docker](https://gist.github.com/sorny/969fe55d85c9b0035b0109a31cbcb088)
+
 ### Inside a linux server via ssh
 
 First, please make sure `ssh -Y` is used when logging to the server. Once inside the server, run
