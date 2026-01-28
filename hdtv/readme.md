@@ -4,8 +4,8 @@ Following systems are supported:
 
 * [Linux](#linux)
 * [MacOS](#macos)
-* [Windows11](#windows_11)
-* [Linux server](#linux_server)
+* [Windows11](#windows-11)
+* [Linux server](#linux-server)
 
 
 General notice:
