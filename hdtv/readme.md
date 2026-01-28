@@ -1,4 +1,4 @@
-## Run hdtv program via Docker container
+# Run hdtv program via Docker container
 
 Following systems are supported:
 
@@ -19,7 +19,7 @@ General notice:
 
 4. The `docker run` command below mounts your current folder to the `/data` inside the container. If another folder needs to be mounted, add `-v host_file_locaiton/container_location` to the command.
 
-### Linux
+## Linux
 
 1. Make sure the docker engine has been installed (For the installation, please check the [instruction here](https://docs.docker.com/engine/install)).
 
@@ -41,7 +41,7 @@ General notice:
    docker run --env "DISPLAY" -v ${HOME}/.Xauthority:/root/.Xauthority -v $(pwd):/data -it --rm --net=host --name hdtv yanzhaowang/hdtv:fedora
    ```
 
-### MacOS
+## MacOS
 
 1. Make sure the docker daemon has been installed. For the installation, see the instruction [here](https://docs.docker.com/desktop/setup/install/mac-install/).
 
@@ -71,11 +71,11 @@ General notice:
    docker run -it --rm -e DISPLAY=docker.for.mac.host.internal:0 -v $(pwd):/data --name hdtv yanzhaowang/hdtv:fedora-arm
    ```
 
-#### Additional references
+### Additional references
 
 - [X11 forwarding on macOS and docker](https://gist.github.com/sorny/969fe55d85c9b0035b0109a31cbcb088)
 
-### Windows 11
+## Windows 11
 
 1. Make sure the docker desktop for Windows has been installed. To install it, please check [here](https://docs.docker.com/desktop/setup/install/windows-install/).
 
@@ -94,7 +94,7 @@ General notice:
    docker run -it --rm -e DISPLAY=host.docker.internal:0 -v "$((Get-Location).Path):/data" --name hdtv yanzhaowang/hdtv:fedora
    ```
 
-### Linux server
+## Linux server
 
 Please make sure `ssh -Y` is used when logging into the server.
 
@@ -102,7 +102,7 @@ Please make sure `ssh -Y` is used when logging into the server.
 ssh -Y username@server_name
 ```
 
-#### With sudo privilege
+### With sudo privilege
 
 1. Make sure docker engine is installed. Check the [section above](#linux) for its installation.
 
@@ -118,7 +118,7 @@ ssh -Y username@server_name
    docker run --env "DISPLAY" -v ${HOME}/.Xauthority:/root/.Xauthority -v $(pwd):/data -it --rm --net=host --name hdtv yanzhaowang/hdtv:fedora
    ```
 
-#### Without sudo privilege (Podman)
+### Without sudo privilege (Podman)
 
 1. Make sure Podman is installed in the system.
 
