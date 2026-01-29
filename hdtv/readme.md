@@ -13,7 +13,7 @@ General notice:
 
 * The `docker` command in a Linux system, by default, requires the sudo permission. Please check out this [instruction](https://docs.docker.com/engine/install/linux-postinstall/) to enable the sudo permission by default when using `docker`.
 
-* There are two images available at Dockerhub: `yanzhaowang/hdtv:fedora` and `yanzhaowang/hdtv:fedora_arm`. The first one is for machines with the x86_64 architecture, which is used by servers and most of the Windows PCs. The second one is for machines with the ARM architecture, which is used by MacBooks with Apple Silicon and some Windows/Linux laptops.
+* There are two images available at Dockerhub: `yanzhaowang/hdtv:fedora` and `yanzhaowang/hdtv:fedora_arm`. The first one is for machines with the x86\_64 architecture, which is used by servers and most of the Windows PCs. The second one is for machines with the ARM architecture, which is used by MacBooks with Apple Silicon and some Windows/Linux laptops.
 
 * Commands that run docker containers are usually pretty long. Thus, it's recommended to create an alias of the command in `.bashrc` (bash), `.zshrc` (zsh). For Windows 11, check out this [instruction](https://stackoverflow.com/questions/24914589/how-to-create-permanent-powershell-aliases) to create a permanent alias.
 
@@ -83,7 +83,7 @@ General notice:
 
 2. Make sure XMing has been installed. To install it, please check out [this](https://sourceforge.net/projects/xming/).
 
-3. Make sure the docker image has been downloaded and updated. To download or update it, open the Windows 11 Powershell (MobaXTerm can be used for older Windows versions) and run:
+3. Make sure the docker image has been downloaded and updated. To download or update it, open the Windows 11 PowerShell (MobaXTerm can be used for older Windows versions) and run:
 
    ```bash
    docker pull yanzhaowang/hdtv:fedora

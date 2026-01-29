@@ -2,7 +2,7 @@ ARG BUILD_REPO=fedora
 FROM ${BUILD_REPO}:latest
 
 RUN yes | dnf upgrade --refresh &&\
-    dnf install -y gcc root python3-root wget git cmake xorg-x11-server-devel which xclock &&\
+    dnf install -y gcc root root-minuit python3-root wget git cmake xorg-x11-server-devel which xclock &&\
     cd /root &&\
     export PYTHONPATH="$(ls -d /usr/lib64/python*/site-packages/ROOT | sed "s/\/ROOT//")" &&\
     wget -O Miniforge3.sh "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh" &&\
