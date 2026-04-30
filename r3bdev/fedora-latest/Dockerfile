@@ -21,6 +21,7 @@ RUN yes | dnf upgrade --refresh &&\
         export CC=clang && export FC=gfortran && export CXX=clang++ &&\
         # install fairsoft &&\
         mkdir -p ${SIMPATH} &&\
+        mkdir -p /tmp/download &&\
         cd /tmp/download &&\
         git clone --depth 1 --branch ${FAIRSOFT_VERSION} https://github.com/YanzhaoW/FairSoft.git &&\
         cd FairSoft && source legacy/setup-fedora.sh &&\
