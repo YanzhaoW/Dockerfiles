@@ -23,7 +23,7 @@ RUN yes | dnf upgrade --refresh &&\
         mkdir -p ${SIMPATH} &&\
         mkdir -p /tmp/download &&\
         cd /tmp/download &&\
-        git clone --depth 1 --branch ${FAIRSOFT_VERSION} https://github.com/FairRootGroup/FairSoft.git &&\
+        git clone --depth 1 --branch ${FAIRSOFT_VERSION} https://github.com/YanzhaoW/FairSoft.git &&\
         cd FairSoft && source legacy/setup-fedora.sh &&\
         mkdir build && cd build &&\
         cmake -DCMAKE_INSTALL_PREFIX=${SIMPATH} -DCMAKE_TLS_VERIFY=0 -DUSE_ROOT_VERSION=${ROOT_VERSION} -Dzeromq_version="master" -DCI_BUILD_MODE=ON -G "Unix Makefiles" .. && make -j${THREAD_NUM} &&\
