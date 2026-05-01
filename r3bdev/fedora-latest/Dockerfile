@@ -26,7 +26,7 @@ RUN yes | dnf upgrade --refresh &&\
         git clone --depth 1 --branch ${FAIRSOFT_VERSION} https://github.com/YanzhaoW/FairSoft.git &&\
         cd FairSoft && source legacy/setup-fedora.sh &&\
         mkdir build && cd build &&\
-        cmake -DCMAKE_INSTALL_PREFIX=${SIMPATH} -DCMAKE_CACHE_DEFAULT_ARGS="-DCMAKE_POLICY_VERSION_MINIMUM=3.5" -DCMAKE_TLS_VERIFY=0 -DUSE_ROOT_VERSION=${ROOT_VERSION} -Dzeromq_version="master" -DCI_BUILD_MODE=ON -G "Unix Makefiles" .. && make -j${THREAD_NUM} &&\
+        cmake -DCMAKE_INSTALL_PREFIX=${SIMPATH} -DCMAKE_CACHE_DEFAULT_ARGS="-DCMAKE_POLICY_VERSION_MINIMUM:STRING=3.5" -DCMAKE_TLS_VERIFY=0 -DUSE_ROOT_VERSION=${ROOT_VERSION} -Dzeromq_version="master" -DCI_BUILD_MODE=ON -G "Unix Makefiles" .. && make -j${THREAD_NUM} &&\
         rm -rf /tmp/download/* &&\
         # install fairroot &&\
         mkdir -p ${FAIRROOTPATH} &&\
