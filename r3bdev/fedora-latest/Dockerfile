@@ -17,6 +17,8 @@ RUN yes | dnf upgrade --refresh &&\
         # install gcc related packages &&\
         dnf install -y gcc gcc-gfortran libasan libhwasan liblsan libtsan libubsan &&\
         dnf install -y util-linux which langpacks-en net-tools iputils tmux procps cmake ninja-build ccache neovim vim zsh htop git gdb lldb valgrind wget nc man pmix-devel pmix-tools byacc gawk json-devel graphviz doxygen ghostscript openssh-server xauth byacc lsb_release fastfetch zlib-ng-compat-static tree file lcov openmpi openmpi-devel gsl-devel&&\
+        # for plotly &&\
+        dnf install -y libXcomposite libXdamage libXfixes libXrandr alsa-lib at-spi2-atk atk &&\
         dnf autoremove -y &&\
         export CC=clang && export FC=gfortran && export CXX=clang++ &&\
         # install fairsoft &&\
